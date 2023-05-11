@@ -9,7 +9,7 @@ const Footer = () => {
           <div className='container mx-auto '>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
               <div>
-                <img src="/logo.svg" className="w-20" alt="" />
+                <img src='/logo.svg' className='w-20' alt='' />
                 <ul>
                   <li className='mb-2'>
                     <a href='# '>Help &amp; FAQs</a>
