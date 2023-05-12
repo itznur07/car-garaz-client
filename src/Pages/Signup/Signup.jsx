@@ -1,7 +1,7 @@
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 import loginImg from "../../assets/images/login/login.svg";
 
-function Login() {
+function Signup() {
   return (
     <div className='flex justify-center space-x-24 items-center my-14'>
       <div>
@@ -12,9 +12,19 @@ function Login() {
         className='bg-white p-20 px-28 rounded-lg border border-[#ff3811]'
       >
         <h2 className='text-3xl text-center font-semibold text-gray-800 mb-10'>
-          Login
+          Create an account
         </h2>
-
+        <div className='mb-4'>
+          <label htmlFor='name' className='block text-gray-700 font-bold mb-2'>
+            Name
+          </label>
+          <input
+            type='text'
+            name='name'
+            id='name'
+            className='w-full border rounded-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+          />
+        </div>
         <div className='mb-4'>
           <label htmlFor='email' className='block text-gray-700 font-bold mb-2'>
             Email
@@ -40,21 +50,11 @@ function Login() {
             className='w-full border rounded-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
           />
         </div>
-        <span className='text-sm mb-4'>
-          Forget password?{" "}
-          <span
-            className='text-blue-500 cursor-pointer'
-            // onClick={handleForgetPassword}
-          >
-            reset
-          </span>
-        </span>
-        <br />
         <button
           type='submit'
           className='bg-[#ff3811] hover:bg-blue-700 text-white w-full font-bold py-2 mt-4 px-4 rounded focus:outline-none focus:shadow-outline'
         >
-          Login
+          Signup
         </button>
         <div className='text-center my-4 text-sm font-medium'>
           or Sign in with
@@ -71,11 +71,12 @@ function Login() {
           </button>
         </div>
         <div className='text-center text-md mt-3 text-sm text-slate-600'>
-          Have an account? <span className="text-[#ff3811] font-medium">Sign in</span>
+          already have an account?{" "}
+          <span className='text-[#ff3811] font-medium'>Sign in</span>
         </div>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Signup;
