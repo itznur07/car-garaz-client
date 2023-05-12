@@ -25,14 +25,17 @@ const Banner = () => {
   return (
     <div className='relative h-screen mx-14 rounded-md'>
       {images.map((imageUrl, index) => (
-        <img
-          key={imageUrl}
-          className={`absolute bottom-0 left-0 ${
-            activeIndex === index ? "opacity-100" : "opacity-0"
-          } transition-opacity duration-500`}
-          src={imageUrl}
-          alt={`Banner ${index + 1}`}
-        />
+        <div>
+          <img
+            key={imageUrl}
+            className={`absolute bottom-0 left-0 ${
+              activeIndex === index ? "opacity-100" : "opacity-0"
+            } transition-opacity duration-500`}
+            src={imageUrl}
+            alt={`Banner ${index + 1}`}
+          />
+          <div className='absolute inset-0 bg-black opacity-20'></div>
+        </div>
       ))}
       <div
         className='absolute bottom-72 left-20 w-full  
@@ -41,8 +44,11 @@ const Banner = () => {
         <h2 className='text-5xl font-bold'>
           Affordable <br /> Price For Car <br /> Servicing
         </h2>
-        <p className='my-5'>There are many variations of passages of  available, <br /> but the majority have suffered alteration in some form</p>
-        <div className="mt-5">
+        <p className='my-5'>
+          There are many variations of passages of available, <br /> but the
+          majority have suffered alteration in some form
+        </p>
+        <div className='mt-5'>
           <button className='bg-[#FF3811] text-white-800 font-bold rounded px-4 py-2 mr-4'>
             Discover more
           </button>
