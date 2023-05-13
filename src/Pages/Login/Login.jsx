@@ -1,14 +1,36 @@
+import { useContext } from "react";
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
 import loginImg from "../../assets/images/login/login.svg";
 
 function Login() {
+  const { signInWithEmailPassword } = useContext(AuthContext);
+
+  const handleSignIn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signInWithEmailPassword(email, password)
+      .then((result) => {
+        console.log(result);
+        alert("User Login Successfully!");
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className='flex justify-center space-x-24 items-center my-14'>
       <div>
         <img src={loginImg} alt='person' />
       </div>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSignIn}
         className='bg-white p-20 px-28 rounded-lg border border-[#ff3811]'
       >
         <h2 className='text-3xl text-center font-semibold text-gray-800 mb-10'>
@@ -71,7 +93,10 @@ function Login() {
           </button>
         </div>
         <div className='text-center text-md mt-3 text-sm text-slate-600'>
-          Have an account? <span className="text-[#ff3811] font-medium">Sign in</span>
+          New here?{" "}
+          <Link to='/signup'>
+            <span className='text-[#ff3811] font-medium'>Sign up</span>
+          </Link>
         </div>
       </form>
     </div>

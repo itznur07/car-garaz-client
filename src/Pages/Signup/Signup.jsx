@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import loginImg from "../../assets/images/login/login.svg";
 
@@ -94,7 +95,9 @@ const Signup = () => {
         </div>
         <div className='text-center text-md mt-3 text-sm text-slate-600'>
           already have an account?{" "}
-          <span className='text-[#ff3811] font-medium'>Sign in</span>
+          <Link to='/login'>
+            <span className='text-[#ff3811] font-medium'>Sign in</span>
+          </Link>
         </div>
       </form>
     </div>
