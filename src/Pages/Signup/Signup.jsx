@@ -1,14 +1,25 @@
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 import loginImg from "../../assets/images/login/login.svg";
 
-function Signup() {
+const Signup = () => {
+
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+  };
+
   return (
     <div className='flex justify-center space-x-24 items-center my-14'>
       <div>
         <img src={loginImg} alt='person' />
       </div>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSignUp}
         className='bg-white p-20 px-28 rounded-lg border border-[#ff3811]'
       >
         <h2 className='text-3xl text-center font-semibold text-gray-800 mb-10'>
@@ -77,6 +88,6 @@ function Signup() {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
