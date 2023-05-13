@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import servicesData from "../../assets/services.json";
 
 const Services = () => {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/services")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setServices(data);
+      });
+  }, []);
+
   return (
     <div className='mx-14 my-14'>
       <div className='text-center'>
@@ -14,7 +24,7 @@ const Services = () => {
         </p>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {servicesData.map((service) => (
+        {services.map((service) => (
           <div
             key={service.id}
             className='bg-white rounded-lg shadow-md overflow-hidden'
