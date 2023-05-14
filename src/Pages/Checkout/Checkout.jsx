@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import HeadingBanner from "../../Components/HeadingBanner/HeadingBanner";
+import { AuthContext } from "../../Providers/AuthProviders";
 import img from "../../assets/images/banner/4.jpg";
 
 const Checkout = () => {
   const checkoutData = useLoaderData();
 
-  console.log(checkoutData);
+  const { user } = useContext(AuthContext);
+
+  const handleOrderSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const amount = form.amount.value;
+    const date = form.date.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    const oderInfo = {
+      name,
+      amount,
+      date,
+      email,
+      message,
+    };
+
+    fetch(`http://localhost:3000/orders`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(oderInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Order confirm added successfully!");
+          form.reset();
+        }
+      });
+  };
 
   return (
     <div className='flex flex-col space-y-5 items-center md:mx-24 h-auto'>
@@ -21,7 +55,7 @@ const Checkout = () => {
         caption='Home / Checkout'
       ></HeadingBanner>
       <form
-        // onSubmit={handleAddCoffe}
+        onSubmit={handleOrderSubmit}
         className='bg-white rounded  max-w-5xl '
       >
         <div className='grid grid-cols-2 gap-5'>
@@ -50,39 +84,56 @@ const Checkout = () => {
             </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='price'
-              name='price'
+              id='amount'
+              name='amount'
               type='text'
               defaultValue={`$${checkoutData.price}`}
               required
             />
           </div>
           <div className='mb-4'>
+            <label
+              htmlFor='date'
+              className='block text-gray-700 font-bold mb-2'
+            >
+              Date
+            </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='phone'
-              name='phone'
-              type='text'
-              placeholder='Phone Number'
+              id='date'
+              name='date'
+              type='date'
               required
             />
           </div>
           <div className='mb-4'>
+            <label
+              htmlFor='email'
+              className='block text-gray-700 font-bold mb-2'
+            >
+              Email
+            </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               id='email'
               name='email'
               type='email'
-              placeholder='Enter Email'
+              defaultValue={user?.email}
               required
             />
           </div>
         </div>
         <div className='mb-4'>
+          <label
+            htmlFor='message'
+            className='block text-gray-700 font-bold mb-2'
+          >
+            Message
+          </label>
           <textarea
             className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='message'
-            name='photo'
+            name='message'
             rows={6}
             type='text'
             placeholder='Your message...'
