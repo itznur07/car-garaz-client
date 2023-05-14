@@ -62,7 +62,7 @@ const Navbar = () => {
           {/* login & cart & wish icon here */}
           <div>
             <div className='flex items-center md:space-x-6'>
-              <Link to='/cart'>
+              <Link to='/orders'>
                 <FiShoppingBag className='text-gray-500' size={25} />
               </Link>
               <Link to='/search'>
