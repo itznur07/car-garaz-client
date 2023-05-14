@@ -4,7 +4,7 @@ import { FaFacebook, FaHeart, FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className='py-8'>
-      <div className='md:mx-14'>
+      <div className='md:mx-24'>
         <footer className='mt-5'>
           <div className='container mx-auto '>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
