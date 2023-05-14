@@ -20,6 +20,8 @@ const Checkout = () => {
 
     const oderInfo = {
       name,
+      servicesName: checkoutData.title,
+      img: checkoutData.img,
       amount,
       date,
       email,
@@ -64,14 +66,14 @@ const Checkout = () => {
               htmlFor='name'
               className='block text-gray-700 font-bold mb-2'
             >
-              Service Name
+              Name
             </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               id='name'
               name='name'
               type='text'
-              defaultValue={checkoutData.title}
+              placeholder='Enter name'
               required
             />
           </div>
