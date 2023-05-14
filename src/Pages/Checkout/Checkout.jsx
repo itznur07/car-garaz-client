@@ -26,26 +26,37 @@ const Checkout = () => {
       >
         <div className='grid grid-cols-2 gap-5'>
           <div className='mb-2'>
+            <label
+              htmlFor='name'
+              className='block text-gray-700 font-bold mb-2'
+            >
+              Service Name
+            </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='firstname'
-              name='firstname'
+              id='name'
+              name='name'
               type='text'
-              placeholder='First Name'
+              defaultValue={checkoutData.title}
               required
             />
           </div>
           <div className='mb-2'>
+            <label
+              htmlFor='amount'
+              className='block text-gray-700 font-bold mb-2'
+            >
+              Amount
+            </label>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='lastname'
-              name='lastname'
+              id='price'
+              name='price'
               type='text'
-              placeholder='Last Name'
+              defaultValue={`$${checkoutData.price}`}
               required
             />
           </div>
-
           <div className='mb-4'>
             <input
               className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -67,7 +78,6 @@ const Checkout = () => {
             />
           </div>
         </div>
-
         <div className='mb-4'>
           <textarea
             className=' appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
