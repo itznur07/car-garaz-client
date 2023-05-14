@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        alert("Log out successfully!");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <div className='bg-white relative z-50'>
@@ -11,7 +22,7 @@ const Navbar = () => {
           <div className='flex items-center flex-shrink-0 text-gray-500 mr-6'>
             <Link to='/'>
               <p className='text-3xl text-slate-900 font-bold uppercase'>
-                <img src='/logo.svg' className="w-16" alt='logo' />
+                <img src='/logo.svg' className='w-16' alt='logo' />
               </p>
             </Link>
           </div>
@@ -63,6 +74,20 @@ const Navbar = () => {
                   Appointment
                 </button>
               </Link>
+              {user ? (
+                <button
+                  onClick={handleLogOut}
+                  className='px-4 py-2.5 rounded bg-[#FF3811] text-white font-semibold'
+                >
+                  Log out
+                </button>
+              ) : (
+                <Link to='/login'>
+                  <button className='px-4 py-2.5 rounded bg-[#FF3811] text-white font-semibold'>
+                    Log in
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </nav>
