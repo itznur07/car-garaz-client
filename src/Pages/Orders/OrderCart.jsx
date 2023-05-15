@@ -1,7 +1,7 @@
 import React from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaCheck, FaTrash } from "react-icons/fa";
 
-const OrderCart = ({ order, handleDeletedOrder }) => {
+const OrderCart = ({ order, handleDeletedOrder, handleUpdateOrder }) => {
   const { img, servicesName, name, amount, date, status, _id } = order;
 
   return (
@@ -25,6 +25,12 @@ const OrderCart = ({ order, handleDeletedOrder }) => {
           }`}
         >
           {status}
+        </button>
+        <button
+          onClick={() => handleUpdateOrder(_id)}
+          className='ml-4 text-gray-600 hover:text-red-500'
+        >
+          <FaCheck />
         </button>
         <button
           onClick={() => handleDeletedOrder(_id)}

@@ -38,6 +38,23 @@ const Orders = () => {
     }
   };
 
+  const handleUpdateOrder = (_id) => {
+    fetch(`http://localhost:3000/orders/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "Accept" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          alert("Order Accepted successfully!");
+          location.reload();
+        }
+      });
+  };
+
   return (
     <div className='md:mx-24'>
       <HeadingBanner
@@ -52,6 +69,7 @@ const Orders = () => {
             key={order._id}
             order={order}
             handleDeletedOrder={handleDeletedOrder}
+            handleUpdateOrder={handleUpdateOrder}
           />
         ))}
       </div>

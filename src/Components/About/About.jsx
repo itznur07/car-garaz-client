@@ -3,7 +3,7 @@ import person from "../../assets/images/about_us/person.jpg";
 
 const About = () => {
   return (
-    <div className='mx-14 my-14'>
+    <div className='md:mx-24 my-14'>
       <div className='flex flex-col lg:flex-row items-center justify-center'>
         <div className='lg:mr-8'>
           <div>

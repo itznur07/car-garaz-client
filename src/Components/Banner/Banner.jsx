@@ -23,7 +23,7 @@ const Banner = () => {
   };
 
   return (
-    <div className='relative h-screen mx-14 rounded-md'>
+    <div className='relative h-screen md:mx-24 rounded-md'>
       {images.map((imageUrl, index) => (
         <div>
           <img
