@@ -2,7 +2,27 @@ import React from "react";
 import { FaTrash } from "react-icons/fa";
 
 const OrderCart = ({ order }) => {
-  const { img, servicesName, name, amount, date, status } = order;
+  const { img, servicesName, name, amount, date, status, _id } = order;
+
+  const handleDeletedOrder = (_id) => {
+    const proceed = confirm("Are you sure you wanna deleted?");
+
+    if (proceed) {
+      fetch(`http://localhost:3000/orders/${_id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("Order Deleted successfully!");
+            location.reload();
+          }
+        });
+    }
+  };
 
   return (
     <div className='flex items-center justify-between p-4 my-5 bg-white rounded-md shadow-md sm:mx-auto sm:w-11/12 lg:w-10/12'>
@@ -26,7 +46,10 @@ const OrderCart = ({ order }) => {
         >
           {status}
         </button>
-        <button className='ml-4 text-gray-600 hover:text-red-500'>
+        <button
+          onClick={() => handleDeletedOrder(_id)}
+          className='ml-4 text-gray-600 hover:text-red-500'
+        >
           <FaTrash />
         </button>
       </div>
