@@ -1,14 +1,21 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import HeadingBanner from "../../Components/HeadingBanner/HeadingBanner";
+import { AuthContext } from "../../Providers/AuthProviders";
 import img from "../../assets/images/banner/5.jpg";
 import OrderCart from "./OrderCart";
 
 const Orders = () => {
-  const ordersData = useLoaderData();
-  console.log("====================================");
-  console.log(ordersData);
-  console.log("====================================");
+  const { user } = useContext(AuthContext);
+
+  const [ordersData, setOrdersData] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/orders?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOrdersData(data);
+      });
+  }, []);
 
   return (
     <div className='md:mx-24'>

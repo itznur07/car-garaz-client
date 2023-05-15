@@ -62,9 +62,18 @@ const Navbar = () => {
           {/* login & cart & wish icon here */}
           <div>
             <div className='flex items-center md:space-x-6'>
-              <Link to='/orders'>
-                <FiShoppingBag className='text-gray-500' size={25} />
-              </Link>
+              {user ? (
+                <Link to='/orders'>
+                  <div className='flex items-center space-x-2'>
+                    <FiShoppingBag className='text-gray-500' size={25} />
+                    <span className='text-lg text-gray-500 text-medium'>
+                      Cart
+                    </span>
+                  </div>
+                </Link>
+              ) : (
+                ""
+              )}
               <Link to='/search'>
                 {" "}
                 <FiSearch className='text-gray-500 cursor-pointer' size={25} />

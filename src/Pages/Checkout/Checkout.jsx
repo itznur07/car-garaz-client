@@ -23,6 +23,7 @@ const Checkout = () => {
       servicesName: checkoutData.title,
       img: checkoutData.img,
       amount,
+      status: "Pending",
       date,
       email,
       message,

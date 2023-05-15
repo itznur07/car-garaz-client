@@ -2,7 +2,7 @@ import React from "react";
 import { FaTrash } from "react-icons/fa";
 
 const OrderCart = ({ order }) => {
-  const { img, name, amount, date, status } = order;
+  const { img, servicesName, name, amount, date, status } = order;
 
   return (
     <div className='flex items-center justify-between p-4 my-5 bg-white rounded-md shadow-md sm:mx-auto sm:w-11/12 lg:w-10/12'>
@@ -13,7 +13,7 @@ const OrderCart = ({ order }) => {
           alt={name}
         />
         <div>
-          <h4 className='font-medium text-gray-800'>{name}</h4>
+          <h4 className='font-medium text-gray-800'>{servicesName}</h4>
           <p className='text-sm text-gray-600'>{amount}</p>
           <p className='text-sm text-gray-600'>{date}</p>
         </div>
