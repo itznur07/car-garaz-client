@@ -17,6 +17,27 @@ const Orders = () => {
       });
   }, []);
 
+  const handleDeletedOrder = (_id) => {
+    const proceed = confirm("Are you sure you wanna deleted?");
+
+    if (proceed) {
+      fetch(`http://localhost:3000/orders/${_id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("Order Deleted successfully!");
+            const remainingData = ordersData.filter((data) => data._id !== _id);
+            setOrdersData(remainingData);
+          }
+        });
+    }
+  };
+
   return (
     <div className='md:mx-24'>
       <HeadingBanner
@@ -27,7 +48,11 @@ const Orders = () => {
       {/* Orders cart list */}
       <div>
         {ordersData?.map((order) => (
-          <OrderCart key={order._id} order={order} />
+          <OrderCart
+            key={order._id}
+            order={order}
+            handleDeletedOrder={handleDeletedOrder}
+          />
         ))}
       </div>
     </div>
