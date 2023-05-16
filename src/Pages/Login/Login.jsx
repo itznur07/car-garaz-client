@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import loginImg from "../../assets/images/login/login.svg";
 
 function Login() {
   const { signInWithEmailPassword } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignIn = (event) => {
     event.preventDefault();
@@ -17,6 +21,7 @@ function Login() {
       .then((result) => {
         console.log(result);
         alert("User Login Successfully!");
+        navigate(from, { replace: true });
         form.reset();
       })
       .catch((error) => {
