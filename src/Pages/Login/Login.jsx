@@ -5,7 +5,7 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import loginImg from "../../assets/images/login/login.svg";
 
 function Login() {
-  const { signInWithEmailPassword } = useContext(AuthContext);
+  const { signInWithEmailPassword, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,25 +18,21 @@ function Login() {
     const password = form.password.value;
 
     signInWithEmailPassword(email, password)
-      .then((result) => {
-        const user = result.user;
-        const loggedUser = {
-          email: user.email,
-        };
+      .then(() => {
         alert("User Login Successfully!");
-        fetch(`http://localhost:3000/jwt`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            localStorage.setItem("car-access-token", data.token);
-            navigate(from, { replace: true });
-          });
+        navigate(from);
         form.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then(() => {
+        alert("Google Sign in successfully!");
+        navigate(from);
       })
       .catch((error) => {
         console.log(error);
@@ -104,7 +100,10 @@ function Login() {
           <button className='p-3 rounded-full bg-slate-100'>
             <FaFacebook />
           </button>
-          <button className='p-3 rounded-full bg-slate-100'>
+          <button
+            onClick={handleGoogleSignIn}
+            className='p-3 rounded-full bg-slate-100'
+          >
             <FaGoogle />
           </button>
           <button className='p-3 rounded-full bg-slate-100'>

@@ -1,8 +1,10 @@
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
@@ -27,6 +29,12 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  /** Sign In With Google */
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, new GoogleAuthProvider());
+  };
+
   /** Sign Out */
   const logOut = () => {
     setLoading(true);
@@ -38,8 +46,25 @@ const AuthProviders = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("current user is", currentUser);
       setLoading(false);
+      if (currentUser && currentUser.email) {
+        const loggedUser = {
+          email: currentUser.email,
+        };
+        fetch(`http://localhost:3000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("car-access-token", data.token);
+          });
+      } else {
+        localStorage.removeItem("car-access-token");
+      }
     });
 
     return () => {
@@ -53,6 +78,7 @@ const AuthProviders = ({ children }) => {
     createUserWithEmailPassword,
     signInWithEmailPassword,
     logOut,
+    signInWithGoogle,
   };
 
   return (
