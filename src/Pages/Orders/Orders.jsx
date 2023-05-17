@@ -1,19 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HeadingBanner from "../../Components/HeadingBanner/HeadingBanner";
 import { AuthContext } from "../../Providers/AuthProviders";
 import img from "../../assets/images/banner/5.jpg";
 import OrderCart from "./OrderCart";
 
 const Orders = () => {
-  const { user } = useContext(AuthContext);
-
+  const { user, logOut } = useContext(AuthContext);
   const [ordersData, setOrdersData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/orders?email=${user?.email}`)
+    fetch(`http://localhost:3000/orders?email=${user?.email}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("car-access-token")} `,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setOrdersData(data);
+        if (!data.error) {
+          setOrdersData(data);
+        } else {
+          logOut();
+          navigate("/");
+        }
       });
   }, []);
 

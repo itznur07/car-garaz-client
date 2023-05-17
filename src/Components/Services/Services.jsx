@@ -6,10 +6,17 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/services")
+    fetch("http://localhost:3000/services", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("car-access-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setServices(data);
+        if (!data.error) {
+          setServices(data);
+        }
       });
   }, []);
 
