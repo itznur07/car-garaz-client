@@ -11,12 +11,15 @@ const Orders = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/orders?email=${user?.email}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("car-access-token")} `,
-      },
-    })
+    fetch(
+      `https://car-doctor-server-two-eta.vercel.app/orders?email=${user?.email}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("car-access-token")} `,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
@@ -32,7 +35,7 @@ const Orders = () => {
     const proceed = confirm("Are you sure you wanna deleted?");
 
     if (proceed) {
-      fetch(`http://localhost:3000/orders/${_id}`, {
+      fetch(`https://car-doctor-server-two-eta.vercel.app/orders/${_id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -50,7 +53,7 @@ const Orders = () => {
   };
 
   const handleUpdateOrder = (_id) => {
-    fetch(`http://localhost:3000/orders/${_id}`, {
+    fetch(`https://car-doctor-server-two-eta.vercel.app/orders/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

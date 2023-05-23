@@ -29,7 +29,7 @@ const Checkout = () => {
       message,
     };
 
-    fetch(`http://localhost:3000/orders`, {
+    fetch(`https://car-doctor-server-two-eta.vercel.app/orders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
